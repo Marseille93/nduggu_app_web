@@ -40,31 +40,31 @@ export function Header() {
 						{/* Navigation Desktop */}
 						<nav className="hidden md:flex space-x-8">
 							<Link
-								href="http://localhost:3000/#Accueil"
+								href="https://nduggu-app-web.vercel.app/#Accueil"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
 								Accueil
 							</Link>
 							<Link
-								href="http://localhost:3000/#Missions"
+								href="https://nduggu-app-web.vercel.app/#Missions"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
 								Missions
 							</Link>
 							<Link
-								href="http://localhost:3000/#Why"
+								href="https://nduggu-app-web.vercel.app/#Why"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
 								Pourquoi nous choisir
 							</Link>
 							<Link
-								href="http://localhost:3000/#Equipe"
+								href="https://nduggu-app-web.vercel.app/#Equipe"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
 								Équipe
 							</Link>
 							<Link
-								href="http://localhost:3000/#Join"
+								href="https://nduggu-app-web.vercel.app/#Join"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
 								Nous Rejoindre
@@ -108,28 +108,34 @@ export function Header() {
 						<div className="md:hidden py-4 border-t border-green-100">
 							<nav className="flex flex-col space-y-4">
 								<Link
-									href="#Accueil"
+									href="https://nduggu-app-web.vercel.app/#Accueil"
 									className="text-gray-700 hover:text-green-600 font-medium"
 								>
 									Accueil
 								</Link>
 								<Link
-									href="/categories"
+									href="https://nduggu-app-web.vercel.app/#Missions"
 									className="text-gray-700 hover:text-green-600 font-medium"
 								>
-									Catégories
+									Missions
 								</Link>
 								<Link
-									href="/fournisseurs"
+									href="https://nduggu-app-web.vercel.app/#Why"
 									className="text-gray-700 hover:text-green-600 font-medium"
 								>
-									Fournisseurs
+									Porquoi Nous Choisir
 								</Link>
 								<Link
-									href="/a-propos"
+									href="https://nduggu-app-web.vercel.app/#Equipe"
 									className="text-gray-700 hover:text-green-600 font-medium"
 								>
-									À propos
+									Équipe
+								</Link>
+								<Link
+									href="https://nduggu-app-web.vercel.app/#Join"
+									className="text-gray-700 hover:text-green-600 font-medium"
+								>
+									Nous Rejoindre
 								</Link>
 								<div className="flex flex-col space-y-2 pt-4">
 									<Button
