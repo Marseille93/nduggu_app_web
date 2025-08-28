@@ -17,16 +17,55 @@ import { Footer } from "@/components/layout/footer";
 import { CategoryCard } from "@/components/ui/category-card";
 import { ProductCard } from "@/components/ui/product-card";
 import { categories, products } from "@/lib/data";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
 	const featuredProducts = products.slice(0, 4);
+	const team = [
+		{
+			name: "Idriss Ahmed HAMOUD",
+			role: "Fondateur & CEO",
+			image:
+				"https://media.licdn.com/dms/image/v2/D4E03AQHCfgcCAs6dnQ/profile-displayphoto-crop_800_800/B4EZifyyYYHoAU-/0/1755027548590?e=1759363200&v=beta&t=o2IbDopjbOaL9f7GeolxIdKbgrcUHCiRjWZR1W24iak",
+			description:
+				"Passionnée d'agriculture durable, Idriss a créé Ndugu App pour révolutionner la distribution alimentaire.",
+		},
+		{
+			name: "Bakary",
+			role: "Co-Fondateur & CTO",
+			image:
+				"https://images.pexels.com/photos/3778876/pexels-photo-377887.jpeg",
+			description:
+				"Expert en Informatique, Bakary développe les solutions digitales qui connectent producteurs et consommateurs.",
+		},
+		{
+			name: "Abdoulaye MBAYE",
+			role: "Développeur Informatique",
+			image:
+				"https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg",
+			description:
+				"Passionné d'informatique, Abdoulaye fait partie de l'équipe qui se charge du développemnt du projet Ndugu App.",
+		},
+		{
+			name: "Seydina Ibrahima DIENG",
+			role: "Développeur Informatique",
+			image:
+				"https://media.licdn.com/dms/image/v2/D4E03AQE-XpuQOytbFA/profile-displayphoto-shrink_800_800/B4EZRVW2nuGwAc-/0/1736598843227?e=1759363200&v=beta&t=gBrxKRWaf2GMWNjZs4w_n7OQ_W2e99_uKEZHdb0tj58",
+			description:
+				"Passionné d'informatique, Abdoulaye fait partie de l'équipe qui se charge du développemnt du projet Ndugu App.",
+		},
+	];
 
 	return (
 		<div className="min-h-screen bg-gray-50">
 			<Header />
 
 			{/* Hero Section */}
-			<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+			<section
+				id="Accueil"
+				className="relative min-h-screen flex items-center justify-center overflow-hidden"
+			>
 				<div className="absolute inset-0 z-0">
 					<Image
 						src="https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg"
@@ -69,29 +108,72 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* Categories Section */}
-			<section className="py-20 bg-white">
+			{/* Missions et Valeurs */}
+			<section
+				id="Missions"
+				className="relative py-20 bg-white overflow-hidden"
+			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="text-center mb-16">
-						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-							Explorez nos catégories
-						</h2>
-						<p className="text-lg text-gray-600 max-w-2xl mx-auto">
-							Des produits frais et de qualité dans chaque catégorie,
-							directement sourcés chez nos producteurs partenaires.
-						</p>
-					</div>
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+						<div>
+							<h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+								Une mission :
+								<span className="block text-green-600">nourrir sainement</span>
+							</h1>
+							<p className="text-xl text-gray-600 mb-8 leading-relaxed">
+								Ndugu App connecte directement les producteurs locaux aux
+								consommateurs, garantissant des produits frais, bio et
+								équitables pour tous.
+							</p>
+							<div className="flex flex-col sm:flex-row gap-4">
+								<Link href="/catalogue">
+									<Button
+										size="lg"
+										className="bg-green-600 hover:bg-green-700 px-8"
+									>
+										Découvrir nos produits
+										<ArrowRight className="ml-2 h-5 w-5" />
+									</Button>
+								</Link>
+								<Link href="/fournisseurs">
+									<Button size="lg" variant="outline" className="px-8">
+										Nos fournisseurs
+									</Button>
+								</Link>
+							</div>
+						</div>
 
-					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-						{categories.map((category) => (
-							<CategoryCard key={category.id} category={category} />
-						))}
+						<div className="relative">
+							<div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+								<Image
+									src="https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg"
+									alt="Agriculture locale"
+									fill
+									className="object-cover"
+								/>
+							</div>
+
+							{/* Floating Stats Cards */}
+							<div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4">
+								<div className="text-center">
+									<div className="text-2xl font-bold text-green-600">50+</div>
+									<div className="text-sm text-gray-600">Producteurs</div>
+								</div>
+							</div>
+
+							<div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-xl p-4">
+								<div className="text-center">
+									<div className="text-2xl font-bold text-blue-600">1500+</div>
+									<div className="text-sm text-gray-600">Clients</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
 
 			{/* Avantages Section */}
-			<section className="py-20 bg-green-50">
+			<section id="Why" className="py-20 bg-green-50">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center mb-16">
 						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -114,7 +196,6 @@ export default function HomePage() {
 								Vos produits frais livrés dans les 24h partout en France
 							</p>
 						</div>
-
 						<div className="text-center group">
 							<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
 								<Heart className="h-8 w-8 text-green-600" />
@@ -126,7 +207,6 @@ export default function HomePage() {
 								Sélection rigoureuse de produits frais, bio et locaux
 							</p>
 						</div>
-
 						<div className="text-center group">
 							<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
 								<Users className="h-8 w-8 text-green-600" />
@@ -138,7 +218,6 @@ export default function HomePage() {
 								Achat direct qui rémunère justement nos agriculteurs
 							</p>
 						</div>
-
 						<div className="text-center group">
 							<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
 								<Clock className="h-8 w-8 text-green-600" />
@@ -150,7 +229,6 @@ export default function HomePage() {
 								Interface intuitive pour commander en quelques clics
 							</p>
 						</div>
-
 						<div className="text-center group">
 							<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
 								<Award className="h-8 w-8 text-green-600" />
@@ -162,7 +240,6 @@ export default function HomePage() {
 								Produits ultra-frais ou remboursés sous 48h
 							</p>
 						</div>
-
 						<div className="text-center group">
 							<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
 								<Leaf className="h-8 w-8 text-green-600" />
@@ -178,62 +255,155 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* Produits vedettes */}
-			<section className="py-20 bg-white">
+			{/* Mockup phone presentation Ndugu App mobile */}
+			<section className="justify-center py-20 bg-white flex flex-col md:flex-row items-center gap-10 overflow-hidden">
+				{/* Mockup phone */}
+				<motion.div
+					className="mockup-phone border-primary"
+					initial={{ x: -300, opacity: 0 }}
+					whileInView={{ x: 0, opacity: 1 }}
+					transition={{ duration: 1, ease: "easeOut" }}
+					viewport={{ once: true }}
+				>
+					<div className="mockup-phone-camera"></div>
+					<div className="mockup-phone-display">
+						<img
+							alt="Ndugu App mobile"
+							src="https://img.daisyui.com/images/stock/453966.webp"
+						/>
+					</div>
+				</motion.div>
+
+				{/* Texte animé */}
+				<motion.div
+					className="max-w-md text-center md:text-left"
+					initial={{ x: 300, opacity: 0 }}
+					whileInView={{ x: 0, opacity: 1 }}
+					transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+					viewport={{ once: true }}
+				>
+					<h2 className="text-3xl md:text-5xl font-bold text-green-600">
+						Ndugu App
+					</h2>
+					<p className="mt-4 text-lg text-gray-700">
+						La facilité d&apos;utilisation pour acheter vos produits frais et
+						locaux directement depuis votre mobile.
+					</p>
+				</motion.div>
+			</section>
+
+			{/* Team */}
+			<section id="Equipe" className="py-16 bg-gray-50">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="text-center mb-16">
+					<div className="text-center mb-12">
 						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-							Nos produits vedettes
+							Notre équipe
 						</h2>
 						<p className="text-lg text-gray-600">
-							Découvrez notre sélection de produits frais et de saison
+							Les personnes passionnées qui portent le projet Ndugu App
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-						{featuredProducts.map((product) => (
-							<ProductCard key={product.id} product={product} />
+					<div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-8">
+						{team.map((member, index) => (
+							<Card
+								key={index}
+								className="border-0 shadow-sm hover:shadow-xl transition-all duration-300"
+							>
+								<CardContent className="p-8 text-center">
+									<div className="relative w-32 h-32 mx-auto mb-6">
+										<Image
+											src={member.image}
+											alt={member.name}
+											fill
+											className="object-cover rounded-full"
+										/>
+									</div>
+									<h3 className="text-xl font-bold text-gray-900 mb-1">
+										{member.name}
+									</h3>
+									<p className="text-green-600 font-medium mb-4">
+										{member.role}
+									</p>
+									<p className="text-gray-600 text-sm leading-relaxed">
+										{member.description}
+									</p>
+								</CardContent>
+							</Card>
 						))}
 					</div>
+				</div>
+			</section>
 
-					<div className="text-center mt-12">
-						<Link href="/catalogue">
-							<Button
-								size="lg"
-								className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
-							>
-								Voir tous les produits
-								<ArrowRight className="ml-2 h-4 w-4" />
-							</Button>
-						</Link>
+			{/* Stats Section */}
+			<section className="py-16 bg-white">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="text-center mb-12">
+						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+							Ndugu App en chiffres
+						</h2>
+						<p className="text-lg text-gray-600">
+							{`L'impact concret de notre engagement`}
+						</p>
+					</div>
+
+					<div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+						<div className="text-center">
+							<div className="text-4xl md:text-5xl font-bold text-green-600 mb-2">
+								50+
+							</div>
+							<div className="text-gray-600">Producteurs partenaires</div>
+						</div>
+						<div className="text-center">
+							<div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
+								1,500+
+							</div>
+							<div className="text-gray-600">Clients satisfaits</div>
+						</div>
+						<div className="text-center">
+							<div className="text-4xl md:text-5xl font-bold text-purple-600 mb-2">
+								150+
+							</div>
+							<div className="text-gray-600">Produits disponibles</div>
+						</div>
+						<div className="text-center">
+							<div className="text-4xl md:text-5xl font-bold text-orange-600 mb-2">
+								98%
+							</div>
+							<div className="text-gray-600">Taux de satisfaction</div>
+						</div>
 					</div>
 				</div>
 			</section>
 
 			{/* CTA Section */}
-			<section className="py-20 bg-gradient-to-r from-green-600 to-green-700">
+			<section
+				id="Join"
+				className="py-16 bg-gradient-to-r from-green-600 to-green-700"
+			>
 				<div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
 					<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-						Rejoignez la communauté Ndugu
+						{`Prêt à rejoindre l'aventure ?`}
 					</h2>
 					<p className="text-xl text-green-100 mb-8">
-						Plus de 10 000 consommateurs font déjà confiance à nos producteurs
-						locaux
+						{`Que vous soyez consommateur ou producteur, devenez acteur d'une alimentation plus responsable`}
 					</p>
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
-						<Button
-							size="lg"
-							className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold shadow-xl"
-						>
-							Commencer maintenant
-						</Button>
-						<Link href="/fournisseurs">
+						<Link href="/inscription">
+							<Button
+								size="lg"
+								className="bg-white text-green-600 hover:bg-green-50 px-8 shadow-xl"
+							>
+								Rejoindre Ndugu App
+							</Button>
+						</Link>
+						<Link href="/contact">
 							<Button
 								size="lg"
 								variant="outline"
-								className="border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 text-lg font-semibold"
+								className="border-2 border-white text-white hover:bg-white hover:text-green-600 px-8"
 							>
-								Devenir partenaire
+								Nous contacter
 							</Button>
 						</Link>
 					</div>

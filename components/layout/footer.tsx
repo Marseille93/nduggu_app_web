@@ -38,34 +38,34 @@ export function Footer() {
 						<ul className="space-y-2 text-sm">
 							<li>
 								<Link
-									href="/catalogue"
+									href="#Accueil"
 									className="text-green-100 hover:text-white transition-colors"
 								>
-									Catalogue
+									Accueil
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/categories"
+									href="#Missions"
 									className="text-green-100 hover:text-white transition-colors"
 								>
-									Catégories
+									Missions
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/fournisseurs"
+									href="#Why"
 									className="text-green-100 hover:text-white transition-colors"
 								>
-									Fournisseurs
+									Pourquoi nous choisir?
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/a-propos"
+									href="#Equipe"
 									className="text-green-100 hover:text-white transition-colors"
 								>
-									À propos
+									Equipe
 								</Link>
 							</li>
 						</ul>
@@ -118,18 +118,18 @@ export function Footer() {
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="h-4 w-4 text-green-300" />
-								<span className="text-green-100">+33 1 23 45 67 89</span>
+								<span className="text-green-100">+221 78 153 44 41</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<MapPin className="h-4 w-4 text-green-300" />
-								<span className="text-green-100">Paris, France</span>
+								<span className="text-green-100">Dakar, Sénégal</span>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div className="border-t border-green-700 mt-8 pt-8 text-center text-sm text-green-200">
-					<p>&copy; 2024 Ndugu App. Tous droits réservés.</p>
+					<p>&copy; 2025 Ndugu App. Tous droits réservés.</p>
 				</div>
 			</div>
 		</footer>

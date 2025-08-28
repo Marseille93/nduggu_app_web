@@ -40,43 +40,39 @@ export function Header() {
 						{/* Navigation Desktop */}
 						<nav className="hidden md:flex space-x-8">
 							<Link
-								href="/catalogue"
+								href="http://localhost:3000/#Accueil"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
-								Catalogue
+								Accueil
 							</Link>
 							<Link
-								href="/categories"
+								href="http://localhost:3000/#Missions"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
-								Catégories
+								Missions
 							</Link>
 							<Link
-								href="/fournisseurs"
+								href="http://localhost:3000/#Why"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
-								Fournisseurs
+								Pourquoi nous choisir
 							</Link>
 							<Link
-								href="/a-propos"
+								href="http://localhost:3000/#Equipe"
 								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
 							>
-								À propos
+								Équipe
+							</Link>
+							<Link
+								href="http://localhost:3000/#Join"
+								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
+							>
+								Nous Rejoindre
 							</Link>
 						</nav>
 
 						{/* Actions */}
 						<div className="flex items-center space-x-4">
-							<Link
-								href="/panier"
-								className="relative p-2 text-gray-700 hover:text-green-600 transition-colors duration-200"
-							>
-								<ShoppingCart className="h-6 w-6" />
-								<span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-									3
-								</span>
-							</Link>
-
 							<div className="hidden md:flex space-x-3">
 								<Button
 									variant="outline"
@@ -112,10 +108,10 @@ export function Header() {
 						<div className="md:hidden py-4 border-t border-green-100">
 							<nav className="flex flex-col space-y-4">
 								<Link
-									href="/catalogue"
+									href="#Accueil"
 									className="text-gray-700 hover:text-green-600 font-medium"
 								>
-									Catalogue
+									Accueil
 								</Link>
 								<Link
 									href="/categories"
