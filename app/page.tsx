@@ -273,18 +273,19 @@ export default function HomePage() {
 
 				{/* Texte animé */}
 				<motion.div
-					className="max-w-md text-center md:text-left"
+					className="max-w-lg text-center md:text-left"
 					initial={{ x: 300, opacity: 0 }}
 					whileInView={{ x: 0, opacity: 1 }}
 					transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
 					viewport={{ once: true }}
 				>
 					<h2 className="text-3xl md:text-5xl font-bold text-green-600">
-						Ndugu App
+						Ndugu App – La nouvelle façon d’acheter responsable
 					</h2>
 					<p className="mt-4 text-lg text-gray-700">
-						La facilité d&apos;utilisation pour acheter vos produits frais et
-						locaux directement depuis votre mobile.
+						Commandez vos produits frais en quelques clics. Une application
+						intuitive qui vous connecte directement aux producteurs locaux, pour
+						manger sainement tout en soutenant l’agriculture de proximité.
 					</p>
 				</motion.div>
 			</section>
