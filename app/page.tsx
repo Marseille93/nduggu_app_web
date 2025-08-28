@@ -267,10 +267,7 @@ export default function HomePage() {
 				>
 					<div className="mockup-phone-camera"></div>
 					<div className="mockup-phone-display">
-						<img
-							alt="Ndugu App mobile"
-							src="https://img.daisyui.com/images/stock/453966.webp"
-						/>
+						<img alt="Ndugu App mobile" src="Ndugu app.png" />
 					</div>
 				</motion.div>
 
