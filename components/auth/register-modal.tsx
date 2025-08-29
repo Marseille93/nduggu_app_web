@@ -324,7 +324,6 @@ export function RegisterModal({
 						<Button
 							type="submit"
 							className="w-full h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-							disabled={!formData.acceptTerms}
 						>
 							Créer mon compte
 						</Button>
