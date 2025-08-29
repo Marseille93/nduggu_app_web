@@ -37,10 +37,50 @@ export function RegisterModal({
 		acceptTerms: false,
 	});
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log("Registration data:", formData);
-		onClose();
+
+		// Construction du payload attendu par ton API
+		const payload = {
+			email: formData.email,
+			first_name: formData.firstName,
+			last_name: formData.lastName,
+			password: formData.password,
+			phone_number: formData.phone,
+			role: "fournisseur", // forcé à "fournisseur"
+		};
+
+		try {
+			const response = await fetch(
+				"https://nduggu-app-backend.afrylink.com/auth/register",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(payload),
+				}
+			);
+
+			if (!response.ok) {
+				// gestion des erreurs HTTP (400, 500…)
+				const errorData = await response.json();
+				console.error("Erreur API:", errorData);
+				alert(
+					"Erreur lors de l'inscription: " + (errorData.message || "Inconnue")
+				);
+				return;
+			}
+
+			const data = await response.json();
+			console.log("Succès inscription:", data);
+
+			alert("Compte créé avec succès ✅");
+			onClose(); // fermer le modal après succès
+		} catch (error) {
+			console.error("Erreur réseau:", error);
+			alert("Impossible de contacter le serveur 🚨");
+		}
 	};
 
 	const handleInputChange = (field: string, value: string | boolean) => {
