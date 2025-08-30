@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, Mail, Phone, X } from "lucide-react";
+import { Eye, EyeOff, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 interface LoginModalProps {
 	isOpen: boolean;
@@ -24,21 +25,68 @@ export function LoginModal({
 	onClose,
 	onSwitchToRegister,
 }: LoginModalProps) {
+	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [password, setPassword] = useState("");
+	const [loading, setLoading] = useState(false);
 
-	const handleEmailLogin = (e: React.FormEvent) => {
-		e.preventDefault();
-		console.log("Login with email:", { email, password });
-		onClose();
+	// Fonction de login générique
+	const handleLogin = async (payload: Record<string, string>) => {
+		try {
+			setLoading(true);
+			const res = await fetch(
+				"https://nduggu-app-backend.afrylink.com/auth/login",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(payload),
+				}
+			);
+
+			if (!res.ok) {
+				throw new Error("Échec de connexion");
+			}
+
+			const data = await res.json();
+			console.log("✅ Login success:", data);
+
+			// Sauvegarde du token (si besoin dans localStorage)
+			localStorage.setItem("token", data.token);
+
+			// Vérification du rôle
+			if (data.user.role === "admin") {
+				router.push("/admin/dashboard");
+			} else if (data.user.role === "fournisseur") {
+				router.push("/fournisseur/dashboard");
+			} else if (data.user.role === "client") {
+				alert("Veuillez utiliser l'application mobile svp");
+			} else {
+				alert("Rôle utilisateur inconnu");
+			}
+
+			onClose();
+		} catch (error: any) {
+			console.error("❌ Login error:", error);
+			alert("Erreur lors de la connexion. Vérifiez vos identifiants.");
+		} finally {
+			setLoading(false);
+		}
 	};
 
+	// Email login
+	const handleEmailLogin = (e: React.FormEvent) => {
+		e.preventDefault();
+		handleLogin({ email, password });
+	};
+
+	// Phone login
 	const handlePhoneLogin = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log("Login with phone:", { phone, password });
-		onClose();
+		handleLogin({ phone_number: phone, password });
 	};
 
 	return (
@@ -130,9 +178,10 @@ export function LoginModal({
 
 								<Button
 									type="submit"
+									disabled={loading}
 									className="w-full h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
 								>
-									Se connecter
+									{loading ? "Connexion..." : "Se connecter"}
 								</Button>
 							</form>
 						</TabsContent>
@@ -190,9 +239,10 @@ export function LoginModal({
 
 								<Button
 									type="submit"
+									disabled={loading}
 									className="w-full h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
 								>
-									Se connecter
+									{loading ? "Connexion..." : "Se connecter"}
 								</Button>
 							</form>
 						</TabsContent>
