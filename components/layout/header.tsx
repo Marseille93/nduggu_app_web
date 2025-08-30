@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ShoppingCart, User, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LoginModal } from "@/components/auth/login-modal";
 import { RegisterModal } from "@/components/auth/register-modal";
 
-export function Header() {
+type HeaderProps = {
+	role?: "public" | "admin" | "supplier";
+};
+
+export function Header({ role = "public" }: HeaderProps) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isLoginOpen, setIsLoginOpen] = useState(false);
 	const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -21,6 +25,47 @@ export function Header() {
 		setIsRegisterOpen(false);
 		setIsLoginOpen(true);
 	};
+
+	// 🔹 Liens pour chaque rôle
+	const publicLinks = [
+		{ href: "#Accueil", label: "Accueil" },
+		{ href: "#Missions", label: "Missions" },
+		{ href: "#Why", label: "Pourquoi nous choisir" },
+		{ href: "#Equipe", label: "Équipe" },
+		{ href: "#Join", label: "Nous Rejoindre" },
+	];
+
+	const supplierLinks = [
+		{ href: "/dashboard", label: "Tableau de bord" },
+		{ href: "/products", label: "Mes Produits" },
+		{ href: "/orders", label: "Mes Commandes" },
+		{ href: "/deliveries", label: "Livraisons" },
+		{ href: "/recipes", label: "Recettes" },
+	];
+
+	const adminLinks = [
+		{ href: "/dashboard", label: "Tableau de bord" },
+		{ href: "/users", label: "Utilisateurs" },
+		{ href: "/products", label: "Produits" },
+		{ href: "/orders", label: "Commandes" },
+		{ href: "/deliveries", label: "Livraisons" },
+	];
+
+	let links = publicLinks;
+	if (role === "supplier") links = supplierLinks;
+	if (role === "admin") links = adminLinks;
+
+	// 🔹 Avatar & Nom pour supplier/admin
+	const userName =
+		role === "supplier" ? "Demba Fall" : role === "admin" ? "Idriss Ahmed" : "";
+	const userRoleText =
+		role === "supplier" ? "Fournisseur" : role === "admin" ? "Admin" : "";
+	const avatarSrc =
+		role === "supplier"
+			? "https://img.daisyui.com/images/profile/demo/gordon@192.webp"
+			: role === "admin"
+			? "https://media.licdn.com/dms/image/v2/D4E03AQHCfgcCAs6dnQ/profile-displayphoto-crop_800_800/B4EZifyyYYHoAU-/0/1755027548590?e=1759363200&v=beta&t=o2IbDopjbOaL9f7GeolxIdKbgrcUHCiRjWZR1W24iak"
+			: "";
 
 	return (
 		<>
@@ -39,55 +84,52 @@ export function Header() {
 
 						{/* Navigation Desktop */}
 						<nav className="hidden md:flex space-x-8">
-							<Link
-								href="http://localhost:3000/#Accueil"
-								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
-							>
-								Accueil
-							</Link>
-							<Link
-								href="http://localhost:3000/#Missions"
-								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
-							>
-								Missions
-							</Link>
-							<Link
-								href="http://localhost:3000/#Why"
-								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
-							>
-								Pourquoi nous choisir
-							</Link>
-							<Link
-								href="http://localhost:3000/#Equipe"
-								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
-							>
-								Équipe
-							</Link>
-							<Link
-								href="http://localhost:3000/#Join"
-								className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
-							>
-								Nous Rejoindre
-							</Link>
+							{links.map((link) => (
+								<Link
+									key={link.href}
+									href={link.href}
+									className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
+								>
+									{link.label}
+								</Link>
+							))}
 						</nav>
 
-						{/* Actions */}
+						{/* Actions / Avatar */}
 						<div className="flex items-center space-x-4">
-							<div className="hidden md:flex space-x-3">
-								<Button
-									variant="outline"
-									className="border-green-600 text-green-600 hover:bg-green-50"
-									onClick={() => setIsLoginOpen(true)}
-								>
-									Connexion
-								</Button>
-								<Button
-									className="bg-green-600 hover:bg-green-700 text-white"
-									onClick={() => setIsRegisterOpen(true)}
-								>
-									{`S'inscrire`}
-								</Button>
-							</div>
+							{role === "public" ? (
+								<div className="hidden md:flex space-x-3">
+									<Button
+										variant="outline"
+										className="border-green-600 text-green-600 hover:bg-green-50"
+										onClick={() => setIsLoginOpen(true)}
+									>
+										Connexion
+									</Button>
+									<Button
+										className="bg-green-600 hover:bg-green-700 text-white"
+										onClick={() => setIsRegisterOpen(true)}
+									>
+										{`S'inscrire`}
+									</Button>
+								</div>
+							) : (
+								<div className="flex flex-col items-center space-y-1">
+									<div>
+										<div className="avatar avatar-online">
+											<div className="w-14 rounded-full ring-2 ring-green-500">
+												<img src={avatarSrc} alt="avatar" />
+											</div>
+										</div>
+										<span className=" ml-2 font-bold text-gray-700">
+											{userName}
+										</span>
+										{/* <span className="text-sm text-green-600">
+											{userRoleText}
+										</span> */}
+									</div>
+								</div>
+							)}
 
 							{/* Menu Mobile */}
 							<button
@@ -107,62 +149,54 @@ export function Header() {
 					{isMenuOpen && (
 						<div className="md:hidden py-4 border-t border-green-100">
 							<nav className="flex flex-col space-y-4">
-								<Link
-									href="#Accueil"
-									className="text-gray-700 hover:text-green-600 font-medium"
-								>
-									Accueil
-								</Link>
-								<Link
-									href="/categories"
-									className="text-gray-700 hover:text-green-600 font-medium"
-								>
-									Catégories
-								</Link>
-								<Link
-									href="/fournisseurs"
-									className="text-gray-700 hover:text-green-600 font-medium"
-								>
-									Fournisseurs
-								</Link>
-								<Link
-									href="/a-propos"
-									className="text-gray-700 hover:text-green-600 font-medium"
-								>
-									À propos
-								</Link>
-								<div className="flex flex-col space-y-2 pt-4">
-									<Button
-										variant="outline"
-										className="w-full border-green-600 text-green-600 hover:bg-green-50"
-										onClick={() => setIsLoginOpen(true)}
+								{links.map((link) => (
+									<Link
+										key={link.href}
+										href={link.href}
+										className="text-gray-700 hover:text-green-600 font-medium"
 									>
-										Connexion
-									</Button>
-									<Button
-										className="w-full bg-green-600 hover:bg-green-700 text-white"
-										onClick={() => setIsRegisterOpen(true)}
-									>
-										{`S'inscrire`}
-									</Button>
-								</div>
+										{link.label}
+									</Link>
+								))}
+								{role === "public" && (
+									<div className="flex flex-col space-y-2 pt-4">
+										<Button
+											variant="outline"
+											className="w-full border-green-600 text-green-600 hover:bg-green-50"
+											onClick={() => setIsLoginOpen(true)}
+										>
+											Connexion
+										</Button>
+										<Button
+											className="w-full bg-green-600 hover:bg-green-700 text-white"
+											onClick={() => setIsRegisterOpen(true)}
+										>
+											{`S'inscrire`}
+										</Button>
+									</div>
+								)}
 							</nav>
 						</div>
 					)}
 				</div>
 			</header>
 
-			<LoginModal
-				isOpen={isLoginOpen}
-				onClose={() => setIsLoginOpen(false)}
-				onSwitchToRegister={handleSwitchToRegister}
-			/>
+			{/* Modals seulement pour public */}
+			{role === "public" && (
+				<>
+					<LoginModal
+						isOpen={isLoginOpen}
+						onClose={() => setIsLoginOpen(false)}
+						onSwitchToRegister={handleSwitchToRegister}
+					/>
 
-			<RegisterModal
-				isOpen={isRegisterOpen}
-				onClose={() => setIsRegisterOpen(false)}
-				onSwitchToLogin={handleSwitchToLogin}
-			/>
+					<RegisterModal
+						isOpen={isRegisterOpen}
+						onClose={() => setIsRegisterOpen(false)}
+						onSwitchToLogin={handleSwitchToLogin}
+					/>
+				</>
+			)}
 		</>
 	);
 }
