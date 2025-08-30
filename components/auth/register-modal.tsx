@@ -26,6 +26,10 @@ export function RegisterModal({
 	onSwitchToLogin,
 }: RegisterModalProps) {
 	const [showPassword, setShowPassword] = useState(false);
+	const [alert, setAlert] = useState<{
+		type: "success" | "error";
+		message: string;
+	} | null>(null);
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -40,14 +44,13 @@ export function RegisterModal({
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		// Construction du payload attendu par ton API
 		const payload = {
 			email: formData.email,
 			first_name: formData.firstName,
 			last_name: formData.lastName,
 			password: formData.password,
 			phone_number: formData.phone,
-			role: "fournisseur", // forcé à "fournisseur"
+			role: "fournisseur",
 		};
 
 		try {
@@ -63,23 +66,30 @@ export function RegisterModal({
 			);
 
 			if (!response.ok) {
-				// gestion des erreurs HTTP (400, 500…)
 				const errorData = await response.json();
 				console.error("Erreur API:", errorData);
-				alert(
-					"Erreur lors de l'inscription: " + (errorData.message || "Inconnue")
-				);
+				setAlert({
+					type: "error",
+					message: errorData.message || "Erreur inconnue",
+				});
 				return;
 			}
 
 			const data = await response.json();
 			console.log("Succès inscription:", data);
 
-			alert("Compte créé avec succès ✅");
-			onClose(); // fermer le modal après succès
+			setAlert({
+				type: "success",
+				message: "Compte créé avec succès ✅",
+			});
+
+			onClose(); // fermer le modal après succès si nécessaire
 		} catch (error) {
 			console.error("Erreur réseau:", error);
-			alert("Impossible de contacter le serveur 🚨");
+			setAlert({
+				type: "error",
+				message: "Impossible de contacter le serveur 🚨",
+			});
 		}
 	};
 
@@ -104,7 +114,38 @@ export function RegisterModal({
 							Créez votre compte Fournisseur en quelques étapes
 						</p>
 					</DialogHeader>
-
+					{alert && (
+						<div
+							role="alert"
+							className={`alert ${
+								alert.type === "success" ? "alert-success" : "alert-error"
+							} mb-4`}
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="h-6 w-6 shrink-0 stroke-current"
+								fill="none"
+								viewBox="0 0 24 24"
+							>
+								{alert.type === "success" ? (
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
+										d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								) : (
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
+										d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								)}
+							</svg>
+							<span>{alert.message}</span>
+						</div>
+					)}
 					<form onSubmit={handleSubmit} className="space-y-4">
 						{/* Informations personnelles */}
 						<div className="grid grid-cols-2 gap-3">
