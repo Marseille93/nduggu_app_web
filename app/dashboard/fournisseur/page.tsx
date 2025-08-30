@@ -39,6 +39,7 @@ import { Header } from "@/components/layout/header";
 import { products } from "@/lib/data";
 import { Footer } from "@/components/layout/footer";
 import Image from "next/image";
+import AddProduct from "@/components/AddProduct";
 
 export default function SupplierDashboard() {
 	const [selectedPeriod, setSelectedPeriod] = useState("month");
@@ -109,6 +110,7 @@ export default function SupplierDashboard() {
 	return (
 		<div className="min-h-screen bg-gray-50">
 			<Header />
+			<AddProduct />
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 				{/* Dashboard Header */}
@@ -125,7 +127,16 @@ export default function SupplierDashboard() {
 								<Calendar className="h-4 w-4" />
 								Ce mois
 							</Button>
-							<Button className="bg-green-600 hover:bg-green-700 flex items-center gap-2">
+							<Button
+								className="bg-green-600 hover:bg-green-700 flex items-center gap-2"
+								onClick={() =>
+									(
+										document.getElementById(
+											"add_product_modal"
+										) as HTMLDialogElement
+									).showModal()
+								}
+							>
 								<Plus className="h-4 w-4" />
 								Ajouter un produit
 							</Button>

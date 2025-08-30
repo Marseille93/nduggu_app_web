@@ -32,10 +32,10 @@ export default function HomePage() {
 				"Passionnée d'agriculture durable, Idriss a créé Ndugu App pour révolutionner la distribution alimentaire.",
 		},
 		{
-			name: "Bakary",
+			name: "Bakar SECK",
 			role: "Co-Fondateur & CTO",
 			image:
-				"https://images.pexels.com/photos/3778876/pexels-photo-377887.jpeg",
+				"https://media-lis1-1.cdn.whatsapp.net/v/t61.24694-24/461288131_1582109332385256_6141080065765351463_n.jpg?ccb=11-4&oh=01_Q5Aa2QGg0XnDujpntRFz2tZMxdr8u3ZMPauTdeCXWSH0ONReNQ&oe=68BE9446&_nc_sid=5e03e0&_nc_cat=100",
 			description:
 				"Expert en Informatique, Bakary développe les solutions digitales qui connectent producteurs et consommateurs.",
 		},
@@ -43,7 +43,7 @@ export default function HomePage() {
 			name: "Abdoulaye MBAYE",
 			role: "Développeur Informatique",
 			image:
-				"https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg",
+				"https://media.licdn.com/dms/image/v2/D4D35AQFK8SHSeFQpMw/profile-framedphoto-shrink_800_800/B4DZZJ4jkyHIAk-/0/1744996284989?e=1757073600&v=beta&t=QL8RVSlYg9Vw9YK2v_JMCp2htuwzrtOQ5pntzOjCInA",
 			description:
 				"Passionné d'informatique, Abdoulaye fait partie de l'équipe qui se charge du développemnt du projet Ndugu App.",
 		},
